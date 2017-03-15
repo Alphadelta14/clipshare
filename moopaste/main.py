@@ -8,6 +8,7 @@ import logging
 import sys
 
 from moopaste import __version__
+from moopaste.capture.clipboard import clipboard_file, paste_file
 from moopaste.config import write_config, resolve_config, config_option
 from moopaste.config import update_parser_arguments
 
@@ -64,6 +65,11 @@ def main():
         write_config(config, args.config_file)
     if args.command == 'init':
         return 0
+    localfile = None
+    if args.command == 'paste':
+        localfile = paste_file()
+    elif args.command == 'clipboard':
+        localfile = clipboard_file()
     return 0
 
 
